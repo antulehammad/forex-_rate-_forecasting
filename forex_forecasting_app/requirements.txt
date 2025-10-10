@@ -1,5 +1,5 @@
 pmdarima
-plotly
+ploty
 streamlit
 pandas
 numpy
