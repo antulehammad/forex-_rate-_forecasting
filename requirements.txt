@@ -1,9 +1,9 @@
 streamlit
 pandas
-numpy
 plotly
 matplotlib
 seaborn
 statsmodels
 scikit-learn
-pmdarima
+numpy==1.26.4
+pmdarima==2.0.4
