@@ -1,3 +1,4 @@
+pmdarima
 plotly
 streamlit
 pandas
