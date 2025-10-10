@@ -1,5 +1,5 @@
-pmdarima
 plotly
+pmdarima
 streamlit
 pandas
 numpy
