@@ -366,19 +366,25 @@ with right_col:
     seasonal = st.checkbox("Seasonal", value=False)
     seasonal_m = st.number_input("Seasonal period (m)", 0, 365, 12)
 
-if st.button("Run forecast"):
-    pair_series_full = (df[to_curr] / df[from_curr]).dropna()
+    if st.button("Run forecast"):
+        pair_series_full = (df[to_curr] / df[from_curr]).dropna()
 
-    # FIX: force it to be 1D series
-    if isinstance(pair_series_full, pd.DataFrame):
-        pair_series_full = pair_series_full.iloc[:, 0]
+        # ✅ FIX: force 1D series
+        if isinstance(pair_series_full, pd.DataFrame):
+            pair_series_full = pair_series_full.iloc[:, 0]
 
-    pair_series_full = pair_series_full.squeeze()
+        pair_series_full = pair_series_full.squeeze()
 
         if pair_series_full.shape[0] >= 10:
             with st.spinner("Training SARIMAX..."):
                 try:
-                    model_fit = train_sarimax(pair_series_full, order=(p, d, q), seasonal=seasonal, seasonal_period=seasonal_m, auto=auto_mode)
+                    model_fit = train_sarimax(
+                        pair_series_full,
+                        order=(p, d, q),
+                        seasonal=seasonal,
+                        seasonal_period=seasonal_m,
+                        auto=auto_mode
+                    )
                 except Exception as e:
                     st.error(f"Model training failed: {e}")
                     model_fit = None
