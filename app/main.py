@@ -13,7 +13,7 @@ st.title("💱 Forex Forecasting")
 
 # 👇 ADD THIS HERE
 st.markdown(
-    "<a href='https://share.streamlit.io/your-username' target='_blank'>"
+    "<a href='https://share.streamlit.io/antulehammad' target='_blank'>"
     "<button style='padding:10px;border-radius:10px;'>👤 View My Profile</button>"
     "</a>",
     unsafe_allow_html=True
