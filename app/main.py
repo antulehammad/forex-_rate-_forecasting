@@ -11,6 +11,14 @@ from model import train_sarimax, forecast_next
 st.set_page_config(page_title="Forex Forecasting", layout="wide")
 st.title("💱 Forex Forecasting")
 
+# 👇 ADD THIS HERE
+st.markdown(
+    "<a href='https://share.streamlit.io/your-username' target='_blank'>"
+    "<button style='padding:10px;border-radius:10px;'>👤 View My Profile</button>"
+    "</a>",
+    unsafe_allow_html=True
+)
+
 # --- data path default
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_DATA = os.path.join(ROOT, "..", "data", "daily_forex_rates.csv")
