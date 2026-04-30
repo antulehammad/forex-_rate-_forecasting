@@ -39,6 +39,7 @@ if df.empty:
 # Flatten any tuple column names
 cols = [c if not isinstance(c, tuple) else "_".join(map(str, c)) for c in df.columns]
 df.columns = cols
+df = df.loc[:, ~df.columns.duplicated()]   # ADD THIS LINE
 
 # ---------------------------
 # Friendly currency names
@@ -365,8 +366,15 @@ with right_col:
     seasonal = st.checkbox("Seasonal", value=False)
     seasonal_m = st.number_input("Seasonal period (m)", 0, 365, 12)
 
-    if st.button("Run forecast"):
-        pair_series_full = (df[to_curr] / df[from_curr]).dropna()   # ✅ FIX direction
+if st.button("Run forecast"):
+    pair_series_full = (df[to_curr] / df[from_curr]).dropna()
+
+    # FIX: force it to be 1D series
+    if isinstance(pair_series_full, pd.DataFrame):
+        pair_series_full = pair_series_full.iloc[:, 0]
+
+    pair_series_full = pair_series_full.squeeze()
+
         if pair_series_full.shape[0] >= 10:
             with st.spinner("Training SARIMAX..."):
                 try:
